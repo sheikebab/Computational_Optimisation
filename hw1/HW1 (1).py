@@ -17,3 +17,11 @@ distance = squareform(pdist(coords))
 a = int(raw_input('Input x coordinate\n'))
 b = int(raw_input('Input y coordinate\n'))
 
+
+def plot_distance(x, y, **kwargs):
+    index = 20*x+y
+    Val = distance[index].reshape(20,20)
+    plt.imshow(Val, **kwargs)
+    return plt.show()
+
+plot_distance(a, b)  # Define the kwargs here for type of graph required
