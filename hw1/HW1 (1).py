@@ -8,3 +8,7 @@ import matplotlib.pylab as plt
 points = scipy.mgrid[0:20, 0:20]
 coords = points.reshape(2, -1).T
 
+# Now Calculating the distance of each point from the point [0,0] or the first term
+
+distance = squareform(pdist(coords))
+
