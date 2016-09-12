@@ -56,3 +56,5 @@ def min_dist(ptx, **kwargs):
     # plt.xlabel('X coord')
     # plt.ylabel('Y coord')
     return plt.show()
+# Call function according to parameters and data as required
+min_dist(ccrds, cmap='hot_r', interpolation='nearest')   # Define the kwargs here for type of graph required
