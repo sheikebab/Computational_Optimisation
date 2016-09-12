@@ -12,3 +12,8 @@ coords = points.reshape(2, -1).T
 
 distance = squareform(pdist(coords))
 
+# Plotting the graph of distances from [0, 0}, which is stored in the array Val
+
+a = int(raw_input('Input x coordinate\n'))
+b = int(raw_input('Input y coordinate\n'))
+
