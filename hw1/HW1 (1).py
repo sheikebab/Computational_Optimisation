@@ -25,6 +25,7 @@ def plot_distance(x, y, **kwargs):
     return plt.show()
 
 plot_distance(a, b)  # Define the kwargs here for type of graph required
+
 crds = [[0,0], [5,5], [19,19], [0,19], [19,0]]
 ccrds =[]
 
@@ -36,3 +37,22 @@ for x in crds:
         index1 = y1
     else:
         index1 = 20*x1+y1
+# Calculate the minimum distance from a set of points
+
+
+def min_dist(ptx, **kwargs):
+
+    mindist = distance[ptx, :]
+    calcmindist = []
+    for x4 in range(400):
+        a = min(mindist[0, [x4]], mindist[1, [x4]], mindist[2, [x4]], mindist[3, [x4]], mindist[4, [x4]])
+        calcmindist.append(a)
+    calcmindist = scipy.asarray(calcmindist)
+    calcmindist = calcmindist.reshape(20,20)
+    plt.imshow(calcmindist, **kwargs)
+    plt.colorbar()
+    # to generate the last figure
+    # plt.title('Distance to closest point')
+    # plt.xlabel('X coord')
+    # plt.ylabel('Y coord')
+    return plt.show()
