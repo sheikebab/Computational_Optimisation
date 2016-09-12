@@ -25,3 +25,14 @@ def plot_distance(x, y, **kwargs):
     return plt.show()
 
 plot_distance(a, b)  # Define the kwargs here for type of graph required
+crds = [[0,0], [5,5], [19,19], [0,19], [19,0]]
+ccrds =[]
+
+# Calculate index of each point in distance matrix
+for x in crds:
+    x1 = x[0]
+    y1 = x[1]
+    if x1 == 0:
+        index1 = y1
+    else:
+        index1 = 20*x1+y1
