@@ -97,3 +97,14 @@ class MilexPlotter(GeoPlotter):
         return get_color.to_rgba(cinc_value)
         # print get_color.to_rgba(cinc_color)
         
+    def plotYear(self, year_value, **kwargs):
+        self.readShapefile('cshapes_0.4-2/cshapes', 'shape_file_class')
+        self.nmc_df = pd.read_csv('NMC_v4_0.csv')
+        tmp = nmc_df[nmc_df['year'] == year_value]
+        tmp = tmp[['ccode', 'cinc']]
+        tmp1 = tmp['ccode'].tolist()
+        tmp2 = tmp['cinc'].tolist()
+        indx = get_indices(tmp1).astype(int)
+        self.drawWorld()
+        self.drawShapes('shape_file_class', indx, **kwargs)
+
