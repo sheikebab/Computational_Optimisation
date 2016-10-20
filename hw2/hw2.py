@@ -4,3 +4,8 @@ from geoplotter import GeoPlotter
 import matplotlib
 import matplotlib.cm
 import matplotlib.pyplot as plt
+
+# Create an object of the GeoPlotter class
+
+world = GeoPlotter()
+
