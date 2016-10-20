@@ -58,3 +58,9 @@ def get_indices(code_country):
         indices_country = scipy.append(indices_country, tmp)
     return indices_country.reshape(len(indices_country), 1)
 
+idx = get_indices([2, 20])
+# print idx
+
+c_shape.drawWorld()
+c_shape.drawShapes('shape_file', idx, facecolor='red')
+
