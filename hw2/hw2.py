@@ -74,3 +74,11 @@ class MilexPlotter(GeoPlotter):
         self.readShapefile('cshapes_0.4-2/cshapes', 'shape_file_class')
         self.zorder == 0
         print self.m.shape_file_class_info
+    
+    def drawWorld(self):
+        self.drawMapBoundary()
+        self.fillContinents(color='blue')
+        self.drawCoastLines(linewidth=0.7)
+        self.drawCountries(linewidth=1.5)
+        self.drawStates(linewidth=0.7)
+        
