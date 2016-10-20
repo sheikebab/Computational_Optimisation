@@ -28,3 +28,6 @@ def get_cinc(df, c_code, year):
 
 get_cinc(nmc_df, 2, 1896)
 
+# Getting a list of all unique country codes
+
+unique_ccode = nmc_df.year.unique()
