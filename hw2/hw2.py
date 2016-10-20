@@ -108,3 +108,34 @@ class MilexPlotter(GeoPlotter):
         self.drawWorld()
         self.drawShapes('shape_file_class', indx, **kwargs)
 
+# Testing the plotYear() function of the MilexPlotter class
+
+test = MilexPlotter() 
+# test.plotYear(2007, facecolor='red')
+
+# Get a unique list of al years in nmc csv file
+
+unique_year = nmc_df.year.unique().tolist()
+# print unique_year
+
+# Mapping the cinc to colors
+def get_cinc_color(cinc_value):
+    cinc_color = scipy.array(nmc_df.cinc)
+    norm_cinc = matplotlib.colors.Normalize(vmin=0, vmax=cinc_color.max())
+    cmap_r = matplotlib.cm.hot
+    get_color = matplotlib.cm.ScalarMappable(norm=norm_cinc, cmap=cmap_r)
+    return get_color.to_rgba(cinc_value)
+#     print get_color.to_rgba(cinc_color)
+
+plot = MilexPlotter()
+frameslist1 = []
+
+# for loop for calling the plotYear function repeatedly
+
+for i in unique_year:
+    plt.figure()
+    im = plot.plotYear(i, facecolor='red')
+    plt.text(0, 0, '%s'%str(i), {'fontsize':15},bbox=dict(facecolor='white'))
+    plt.savefig('fig_%s.png'%str(i))
+    frameslist1.append('fig_%s.png'%str(i))
+
