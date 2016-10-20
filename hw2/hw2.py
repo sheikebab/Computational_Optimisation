@@ -64,3 +64,13 @@ idx = get_indices([2, 20])
 c_shape.drawWorld()
 c_shape.drawShapes('shape_file', idx, facecolor='red')
 
+# Define MilexPlotter class
+
+class MilexPlotter(GeoPlotter):
+    
+    def __init__(self):
+        self = GeoPlotter()
+        self.nmc_df = pd.read_csv('NMC_v4_0.csv')
+        self.readShapefile('cshapes_0.4-2/cshapes', 'shape_file_class')
+        self.zorder == 0
+        print self.m.shape_file_class_info
