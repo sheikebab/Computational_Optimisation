@@ -31,3 +31,8 @@ get_cinc(nmc_df, 2, 1896)
 # Getting a list of all unique country codes
 
 unique_ccode = nmc_df.year.unique()
+# print 'List of al unique codes:\n', list(unique_ccode)
+
+# Getting the value counts of all the country codes
+
+value_count_ccode = nmc_df.ccode.value_counts(ascending=True)
