@@ -82,3 +82,9 @@ class MilexPlotter(GeoPlotter):
         self.drawCountries(linewidth=1.5)
         self.drawStates(linewidth=0.7)
         
+    def plotCountry(self, code, **kwarg):
+        self.readShapefile('cshapes_0.4-2/cshapes', 'shape_file_class')
+        ind = get_indices(code)
+        self.drawWorld()
+        self.drawShapes('shape_file_class', ind, facecolor='red')
+    
