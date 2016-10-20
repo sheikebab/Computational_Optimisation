@@ -36,3 +36,15 @@ unique_ccode = nmc_df.year.unique()
 # Getting the value counts of all the country codes
 
 value_count_ccode = nmc_df.ccode.value_counts(ascending=True)
+# print 'Value counts of country codes:\n', value_count_ccode
+
+# Reading in the cshapes file
+
+c_shape = GeoPlotter()
+c_shape.readShapefile('cshapes_0.4-2/cshapes', 'shape_file')
+
+# Creating a Dataframe using the shapefile_info
+
+c_shape_df = pd.DataFrame(c_shape.m.shape_file_info)
+c_shape_df.head()
+
