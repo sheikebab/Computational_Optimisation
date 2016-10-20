@@ -24,3 +24,7 @@ def get_cinc(df, c_code, year):
     nmc_cinc = nmc_df[(df.ccode==c_code) & (df.year==year)]
     return nmc_cinc.cinc
 
+# Testing the function to get the cinc
+
+get_cinc(nmc_df, 2, 1896)
+
