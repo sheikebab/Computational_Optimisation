@@ -18,3 +18,9 @@ world.drawWorld()
 nmc_df = pd.read_csv('NMC_v4_0.csv')
 # print 'Imported data', nmc_df
 
+# Function to get the cinc code when country code and year are specified.
+
+def get_cinc(df, c_code, year):
+    nmc_cinc = nmc_df[(df.ccode==c_code) & (df.year==year)]
+    return nmc_cinc.cinc
+
