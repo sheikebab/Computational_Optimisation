@@ -9,3 +9,7 @@ import matplotlib.pyplot as plt
 
 world = GeoPlotter()
 
+# Call the drawWorld function of class GeoPlotter
+
+world.drawWorld()
+
