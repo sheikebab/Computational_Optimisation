@@ -88,3 +88,12 @@ class MilexPlotter(GeoPlotter):
         self.drawWorld()
         self.drawShapes('shape_file_class', ind, facecolor='red')
     
+    # Mapping the cinc to colors
+    def get_cinc_color(self, cinc_value):
+        cinc_color = scipy.array(nmc_df.cinc)
+        norm_cinc = matplotlib.colors.Normalize(vmin=0, vmax=cinc_color.max())
+        cmap_r = matplotlib.cm.hot
+        get_color = matplotlib.cm.ScalarMappable(norm=norm_cinc, cmap=cmap_r)
+        return get_color.to_rgba(cinc_value)
+        # print get_color.to_rgba(cinc_color)
+        
