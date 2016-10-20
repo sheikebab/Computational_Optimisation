@@ -139,3 +139,10 @@ for i in unique_year:
     plt.savefig('fig_%s.png'%str(i))
     frameslist1.append('fig_%s.png'%str(i))
 
+# Outputing a list of all figures to frameslist txt file
+
+thefile = open('frameslist.txt', 'w')  # reading the file into the program as a writable file
+# print frameslist1
+for item in frameslist1:
+#   print item
+    thefile.write("%s\n" % item)
