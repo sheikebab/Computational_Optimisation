@@ -13,3 +13,8 @@ world = GeoPlotter()
 
 world.drawWorld()
 
+# Reading the csv file into the program
+
+nmc_df = pd.read_csv('NMC_v4_0.csv')
+# print 'Imported data', nmc_df
+
