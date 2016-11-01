@@ -50,3 +50,13 @@ class Network:
             matplotlib.pyplot.savefig('streets.png')
             matplotlib.pyplot.show()
 
+    def plotaddresses(self, ds,  destination=None):
+
+        for i in range(len(ds.Lon)):
+            self.geo.drawPoints(ds.Lon[i], ds.Lat[i], color = 'r')
+        if destination != None:
+            Lat = ds[ds.Address.str.extract('([A-Za-z\- ]*),', expand=False) == destination][
+                'Lat'].values[0]
+            Lon = ds[ds.Address.str.extract('([A-Za-z\- ]*),', expand=False) == destination][
+                'Lon'].values[0]
+            self.geo.drawPoints(lat=Lat, lon=Lon, color='g')
