@@ -40,3 +40,13 @@ class Network:
         points = [[self.start_point[i], self.end_point[i]] for i in range(len(self.start_point))]
         return points
 
+    def plotstreets(self, points, loc=None,  plotaddresses = False, plotgraph=False):
+
+        self.geo.setZoom(-97.8526, 30.2147, -97.626, 30.4323)
+        self.geo.drawLines(points, color = 'b',linewidth = 0.3)
+        if plotaddresses:
+            self.plotaddresses(self.adresses_df, loc)
+        if plotgraph:
+            matplotlib.pyplot.savefig('streets.png')
+            matplotlib.pyplot.show()
+
