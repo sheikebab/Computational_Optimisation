@@ -91,3 +91,39 @@ class Network:
         self.network.add_edges_from(B)
 
    
+    def findClosestNode(self, Lat,Lon):
+        pos_nodes = scipy.array([])
+        range_lat = [min([z[1][1] for z in self.getPointsPlot(self.austin_df)]),
+                max([z[1][1] for z in self.getPointsPlot(self.austin_df)])]
+        range_lon = [min([z[1][0] for z in self.getPointsPlot(self.austin_df)]),
+                max([z[1][0] for z in self.getPointsPlot(self.austin_df)])]
+        latdf = 0.0005
+        londf = 0.0005
+        ct = 0
+        list_Lon = scipy.array([z[1][0] for z in self.getPointsPlot(self.austin_df)])
+        list_Lat = scipy.array([z[1][1] for z in self.getPointsPlot(self.austin_df)])
+
+        while len(pos_nodes) == 0 and ((latdf < scipy.absolute(range_lat[0] - range_lat[1]) / 2) and (
+            londf < scipy.absolute(range_lon[0] - range_lon[1]))):
+            ct = ct + 1
+            latidx1 = scipy.where((list_Lat < Lat + ct * latdf))
+            tempLatList = list_Lat[latidx1]
+            tempLonList = list_Lon[latidx1]
+            latidx = scipy.where(tempLatList > Lat - ct * latdf)
+            tempLatList = tempLatList[latidx]
+            tempLonList = tempLonList[latidx]
+            lonidx1 = scipy.where(tempLonList > Lon - ct * londf)
+            tempLatList = tempLatList[lonidx1]
+            tempLonList = tempLonList[lonidx1]
+            lonidx = scipy.where(tempLonList < Lon + ct * londf)
+            pos_nodes = scipy.array([tempLonList[lonidx], tempLatList[lonidx]])
+
+        if len(pos_nodes) == 0:
+            return None
+        else:
+            dist = scipy.sqrt(scipy.sum(scipy.array([pos_nodes[0] - Lon, pos_nodes[1] - Lat]) ** 2, axis=0))
+            closeNode = scipy.array([pos_nodes[0][scipy.where(dist == min(dist))][0],
+                                     pos_nodes[1][scipy.where(dist == min(dist))][0]])
+            nodeNames = [z[0] for z in self.getPointsPlot(self.austin_df) if (z[1][0] == closeNode[0]) & (z[1][1] == closeNode[1])]
+            return nodeNames
+
