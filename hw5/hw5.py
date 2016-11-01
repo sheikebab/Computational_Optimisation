@@ -127,3 +127,6 @@ class Network:
             nodeNames = [z[0] for z in self.getPointsPlot(self.austin_df) if (z[1][0] == closeNode[0]) & (z[1][1] == closeNode[1])]
             return nodeNames
 
+    def getSPNDjikstras(self, start_node, dest_node):
+        return networkx.shortest_path(self.network, source=start_node, target=dest_node)
+
