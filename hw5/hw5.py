@@ -182,3 +182,13 @@ class Network:
 
         return pyomo_sol
 
+    # draws path
+    def drawPath(self, path):
+        stLines = [[[float(dw) for dw in g.split()] for g in path]]
+        self.geo.drawLines(lines=stLines, color='y', linewidth=5, alpha=3)
+        ax = self.geo.getAxes()
+        ax.axes.get_xaxis().set_ticks([])
+        ax.get_yaxis().set_ticks([])
+
+    
+
