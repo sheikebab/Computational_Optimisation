@@ -60,3 +60,26 @@ class Network:
             Lon = ds[ds.Address.str.extract('([A-Za-z\- ]*),', expand=False) == destination][
                 'Lon'].values[0]
             self.geo.drawPoints(lat=Lat, lon=Lon, color='g')
+            
+    def getEdges(self):
+        # Sets up edge sets
+        # FT Streets
+        FT_df = self.austin_df[self.austin_df.ONE_WAY == 'FT']
+        FT_start, FT_end = self.getPointsNetwork(FT_df)
+        FT_weights = [dict(weight=i) for i in FT_df.SECONDS.values]
+        FT_edges = zip(FT_start, FT_end,FT_weights)
+
+        # TF Streets
+        TF_df = self.austin_df[self.austin_df.ONE_WAY == 'TF']
+        TF_start, TF_end= self.getPointsNetwork(TF_df)
+        TF_weights = [dict(weight=i) for i in TF_df.SECONDS.values]
+        TF_edges = zip(TF_start, TF_end,TF_weights)
+
+        # B Streets
+        B_df = self.austin_df[self.austin_df.ONE_WAY == 'B']
+        B_start, B_end = self.getPointsNetwork(B_df)
+        B_weights = [dict(weight=i) for i in B_df.SECONDS.values]
+        B_edges = zip(B_start, B_end,B_weights)
+
+        return FT_edges, TF_edges, B_edges
+
