@@ -28,3 +28,15 @@ class Network:
         self.end_point = ds.kmlgeometry.str.extract('([0-9-.]* [0-9-.]*)\)')
         return self.start_point, self.end_point
 
+    def getPointsPlot(self, ds):
+        self.start_point = scipy.array(ds.kmlgeometry.str.extract('LINESTRING \(([0-9-.]* [0-9-.]*,)'))
+        self.end_point = scipy.array(ds.kmlgeometry.str.extract('([0-9-.]* [0-9-.]*)\)'))
+        self.start_point = [i.split(' ') for i in self.start_point]
+        self.end_point = [i.split(' ') for i in self.end_point]
+        for i in range(len(self.start_point)):
+            self.start_point[i][1] = self.start_point[i][1].replace(',', '')
+        self.start_point = [[float(float(j)) for j in i] for i in self.start_point]
+        self.end_point = [[float(float(j)) for j in i] for i in self.end_point]
+        points = [[self.start_point[i], self.end_point[i]] for i in range(len(self.start_point))]
+        return points
+
