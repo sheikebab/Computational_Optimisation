@@ -192,3 +192,51 @@ class Network:
 
     
 
+if __name__=='__main__':
+    obj = Network('austin.csv')
+
+    startLoc = obj.findClosestNode(obj.adresses_df[
+        obj.adresses_df.Address.str.extract('([A-Za-z ]*),', expand=False) ==
+        'Engineering Teaching Center']['Lat'].values[0], obj.adresses_df[
+        obj.adresses_df.Address.str.extract('([A-Za-z ]*),', expand=False) ==
+        'Engineering Teaching Center']['Lon'].values[0])[0]
+
+    endLoc = obj.findClosestNode(obj.adresses_df[
+        obj.adresses_df.Address.str.extract('([A-Za-z ]*),', expand=False) ==
+        'Hula Hut']['Lat'].values[0], obj.adresses_df[
+        obj.adresses_df.Address.str.extract('([A-Za-z ]*),', expand=False) ==
+        'Hula Hut']['Lon'].values[0])[0]
+    print startLoc,  endLoc
+    # path_hh = obj.getSPNDjikstras(startLoc, endLoc)
+    # # path_hh_pyomo = obj.getSPNGurobi(startLoc, endLoc)
+    #
+    # obj.geo.clear()
+    # obj.drawPath(path=path_hh)
+    # obj.plotstreets(obj.getPointsPlot(obj.austin_df), 'Engineering Teaching Center' )
+    # manager = matplotlib.pyplot.get_current_fig_manager()
+    # manager.window.showMaximized()
+    # matplotlib.pyplot.show()
+    # matplotlib.pyplot.savefig('path_hh.png')
+    #
+    # endLoc2 = obj.findClosestNode(obj.adresses_df[
+    #     obj.adresses_df.Address.str.extract('([A-Za-z\- ]*),', expand=False) ==
+    #     'Rudys Country Store and Bar-B-Q']['Lat'].values[0], obj.adresses_df[
+    #     obj.adresses_df.Address.str.extract('([A-Za-z\- ]*),', expand=False) ==
+    #     'Rudys Country Store and Bar-B-Q']['Lon'].values[0])[0]
+    # path_rudys = obj.getSPNDjikstras(startLoc, endLoc2)
+    # # path_rudys_pyomo = obj.getSPNGurobi(startLoc, endLoc2)
+    #
+    # obj.geo.clear()
+    # obj.drawPath(path=path_rudys)
+    # obj.plotstreets(obj.getPointsPlot(obj.austin_df), 'Engineering Teaching Center' )
+    # manager = matplotlib.pyplot.get_current_fig_manager()
+    # manager.window.showMaximized()
+    # matplotlib.pyplot.show()
+    # matplotlib.pyplot.savefig('path_rudys.png')
+    #
+    # obj.geo.clear()
+    # obj.drawPath(path=path_rudys)
+    # obj.plotstreets(obj.getPointsPlot(obj.austin_df), 'Engineering Teaching Center' )
+    # manager = matplotlib.pyplot.get_current_fig_manager()
+    # manager.window.showMaximized()
+    # matplotlib.pyplot.show()
