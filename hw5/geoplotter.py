@@ -383,5 +383,3 @@ class GeoPlotter:
         lon_range = max_lon - min_lon
         self.setZoom(min_lon - .1 * lon_range, min_lat - .1 * lat_range, max_lon + .1 * lon_range,
                      max_lat + .1 * lat_range)
-
-
