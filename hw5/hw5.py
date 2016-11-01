@@ -83,3 +83,11 @@ class Network:
 
         return FT_edges, TF_edges, B_edges
 
+    def createNetworkxGraph(self):
+        self.network = networkx.DiGraph()
+        FT, TF, B = self.getEdges()
+        self.network.add_edges_from(FT)
+        self.network.add_edges_from(TF)
+        self.network.add_edges_from(B)
+
+   
