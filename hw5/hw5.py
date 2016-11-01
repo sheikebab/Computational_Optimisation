@@ -240,3 +240,5 @@ if __name__=='__main__':
     # manager = matplotlib.pyplot.get_current_fig_manager()
     # manager.window.showMaximized()
     # matplotlib.pyplot.show()
+    # matplotlib.pyplot.savefig('zoomed_path_rudy')
+
