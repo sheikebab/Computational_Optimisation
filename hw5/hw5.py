@@ -23,3 +23,8 @@ class Network:
         # Plot the basic map and adresses.
         # self.plotstreets(self.getPointsPlot(self.austin_df), 'Engineering Teaching Center',True, True)
 
+    def getPointsNetwork(self, ds):
+        self.start_point = ds.kmlgeometry.str.extract('LINESTRING \(([0-9-.]* [0-9-.]*,)')
+        self.end_point = ds.kmlgeometry.str.extract('([0-9-.]* [0-9-.]*)\)')
+        return self.start_point, self.end_point
+
