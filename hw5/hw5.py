@@ -130,3 +130,55 @@ class Network:
     def getSPNDjikstras(self, start_node, dest_node):
         return networkx.shortest_path(self.network, source=start_node, target=dest_node)
 
+    def getSPNGurobi(self, startnode, destnode):
+        self.m = pe.ConcreteModel()
+
+        # Create nodes set
+        self.m.node_set = pe.Set(initialize=self.getPointsPlot(self.austin_df))
+        self.m.arc_set = pe.Set(initialize=self.network.edges(), ordered=True)
+
+        # Create variables
+        self.m.Y = pe.Var(self.m.arc_set, domain=pe.NonNegativeReals)
+
+        # Create objective
+        def obj_rule(m):
+            return sum(m.Y[(u, v)] * self.network[u][v]['weight'] for u, v, d in self.network.edges_iter(data=True))
+
+        self.m.OBJ = pe.Objective(rule=obj_rule, sense=pe.minimize)
+
+        # Flow Balance rule
+        def flow_bal_rule(m, n):
+            if n == startnode:
+                imbalance = -1
+            elif n == destnode:
+                imbalance = 1
+            else:
+                imbalance = 0
+
+            preds = self.network.predecessors(n)
+            succs = self.network.successors(n)
+
+            return sum(m.Y[(p, n)] for p in preds) - sum(m.Y[(n, s)] for s in succs) == imbalance
+
+        self.m.FlowBal = pe.Constraint(self.m.node_set, rule=flow_bal_rule)
+
+        solver = pyomo.opt.SolverFactory('gurobi')
+        results = solver.solve(self.m, tee=True, keepfiles=False,
+                               options_string="mip_tolerances_integrality=1e-9 mip_tolerances_mipgap=0")
+
+        if (results.solver.status != pyomo.opt.SolverStatus.ok):
+            logging.warning('Check solver not ok?')
+        if (results.solver.termination_condition != pyomo.opt.TerminationCondition.optimal):
+            logging.warning('Check solver optimality?')
+
+        pyomo_sol = [startnode]
+        nowNode = startnode
+
+        while nowNode != destnode:
+            nowNode_succs = self.network.successors(nowNode)
+            nextNode = [s for s in nowNode_succs if self.m.Y[(nowNode, s)] == 1]
+            pyomo_sol.append(nextNode[0])
+            nowNode = nextNode[0]
+
+        return pyomo_sol
+
